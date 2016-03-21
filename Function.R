@@ -95,3 +95,19 @@ listSymbols <- function(){
   vCompany <- as.character(dfCompany[, 1])
   return (vCompany)
 }
+
+# http://www.investopedia.com/terms/g/graham-number.asp
+addGrahamNumber <- function(dfData){
+  dfData$"Earnings/Share Num" <- as.numeric(as.character(dfData$"Earnings/Share"))  
+  # Filter off Negative earning/share
+  dfData <- dfData[dfData$'Earnings/Share Num' > 0,]
+  # Calculate the grahamNumber
+  dfTemp <- within(dfData, {
+    GrahamNumber <- round(sqrt(22.5 * dfData$"Earnings/Share Num" * dfData$"Book Value"),digits=3)
+  })
+  # Retrieve only the require column, names(dfTemp)
+  dfGrahamNumber <- dfTemp[,c("Symbol","Name","Last Trade (without time)","GrahamNumber","Earnings/Share","Book Value","P/E Ratio")]  
+  return(dfGrahamNumber)
+}
+
+
