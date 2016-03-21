@@ -2,4 +2,4 @@
 SGX crawler, data from Yahoo finance
 
 ## SGX symbol listing
-- [] To update Symbols.txt (_regularly_)
+- [ ] To update Symbols.txt (_regularly_)
