@@ -8,4 +8,7 @@ szURL <- paste0("http://download.finance.yahoo.com/d/quotes.csv?s=",paste(listSy
 dfData <- read.csv(szURL,header=FALSE)
 names(dfData) <- dfTag$description
 dfData <- addGrahamNumber(dfData)
+
+# Print and plot
 print(dfData)
+plotGrahmNumber(dfData)
