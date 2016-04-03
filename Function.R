@@ -110,4 +110,14 @@ addGrahamNumber <- function(dfData){
   return(dfGrahamNumber)
 }
 
+plotGrahmNumber <- function(dfData){
+  # Define 2 vectors
+  colors <- c("blue", "red")
+  labels <- c("LastTrade", "Graham Number")
+  plot(dfData$`Last Trade (without time)`, type="o", col=colors[1], pch="T",xaxt='n',ann=FALSE)
+  lines(dfData$GrahamNumber, type="o", col=colors[2], pch="G")
+  legend(20, 40, legend=labels,col=colors, lty=1, cex=0.6)
+  axis(1, at=1:nrow(dfData), labels=dfData$Symbol,par(las=3))
+}
+
 
