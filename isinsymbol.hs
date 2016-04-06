@@ -2,8 +2,9 @@ import Network.HTTP.Conduit
 import Network.HTTP
 import qualified Data.ByteString.Lazy as LB
 import Data.Char (chr)
-import Data.String.Utils (split, strip, replace)
+import Data.String.Utils (split, replace)
 import Data.List (intersperse)
+import qualified Data.Text as T
 
 csvfilename = "fulllisting.csv"
 
@@ -17,13 +18,17 @@ data Company = Company { name :: String
 			,shortName :: String			
 			} deriving (Show)  
 
-toCompany x = Company (getName x) (getStatus x) (getIsin x) (getCode x) (getShortName x)
-	where getName = strip.take 50
-	      getStatus = take 2.drop 50
-	      getIsin = take 12 . drop 60
-	      getCode = strip.take 4 . drop 80
-	      getShortName x = replace "\r" "" $ drop 90 x
-
+--toCompany x = Company (getName x) (getStatus x) (getIsin x) (getCode x) (getShortName x)
+toCompany x = let  
+		nameT = splitAt 50 x           
+		statusT = splitAt 2 (snd nameT)
+		isinT = splitAt 20 (snd statusT)
+		codeT = splitAt 12 (snd isinT)
+		shortName =  usp $ replace "\r" "" (snd codeT)
+	      in Company (retFst nameT) (retFst statusT) (retFst isinT) (retFst codeT) (shortName)
+	      where retFst = usp.fst
+ 		    usp = T.unpack.T.strip.T.pack
+		
 toCSVRow coy = init.tail $ foldl (\x y-> x++";"++y) "" [(name coy),(status coy),(iSINCode coy),(code coy),(shortName coy)]
 
 downloadPage ::  IO [String]
@@ -41,6 +46,7 @@ main = do
 
 	-- Write csv file
 	writeCSVHeader
-	mapM_ writeCSVData (tail lSym)
+	mapM_ writeCSVData (tail lSym)	
 
 	print "FIN"
+
