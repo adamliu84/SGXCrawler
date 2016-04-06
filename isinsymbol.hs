@@ -1,10 +1,9 @@
 import Network.HTTP.Conduit
 import Network.HTTP
-import qualified Data.ByteString.Lazy as LB
+import qualified Data.ByteString.Lazy as LB (unpack)
 import Data.Char (chr)
-import Data.String.Utils (split, replace)
-import Data.List (intersperse)
-import qualified Data.Text as T
+import Data.String.Utils (replace)
+import qualified Data.Text as T (pack, unpack,strip)
 
 csvfilename = "fulllisting.csv"
 
@@ -18,7 +17,6 @@ data Company = Company { name :: String
 			,shortName :: String			
 			} deriving (Show)  
 
---toCompany x = Company (getName x) (getStatus x) (getIsin x) (getCode x) (getShortName x)
 toCompany x = let  
 		nameT = splitAt 50 x           
 		statusT = splitAt 2 (snd nameT)
