@@ -42,7 +42,7 @@ toCompany x = let
 companyHeaderRow :: Company
 companyHeaderRow = Company "Name" "Status" "iSInCode" "Code" "ShortName"
 writeCSVData :: Company -> IO ()
-writeCSVData coy = appendFile csvfilename $ ((name coy)++";"++(code coy)) ++ "\n"
+writeCSVData coy = appendFile csvfilename $ ((code coy)++";"++(name coy)) ++ "\n"
 
 main = do
     -- Parse sgx page listing
