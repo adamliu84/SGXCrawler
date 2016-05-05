@@ -39,8 +39,8 @@ toCompany x = let
         where retFst = usp.fst
               usp = T.unpack.T.strip.T.pack
         
-writeCSVHeader :: IO ()   
-writeCSVHeader = appendFile csvfilename "Name;Code\n"
+companyHeaderRow :: Company
+companyHeaderRow = Company "Name" "Status" "iSInCode" "Code" "ShortName"
 writeCSVData :: Company -> IO ()
 writeCSVData coy = appendFile csvfilename $ ((name coy)++";"++(code coy)) ++ "\n"
 
@@ -50,8 +50,7 @@ main = do
     let lSym = sort $ map toCompany temp
 
     -- Write csv file
-    writeCSVHeader
-    mapM_ writeCSVData (tail lSym)    
+    mapM_ writeCSVData (companyHeaderRow:tail lSym)    
 
     print "FIN"
 
