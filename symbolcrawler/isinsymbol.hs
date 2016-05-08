@@ -6,7 +6,7 @@ import Data.String.Utils (replace)
 import Data.List
 import qualified Data.Text as T (pack, unpack,strip)
 
-csvfilename = "SGXSymbol.csv"
+csvfilename = "..\\SGXSymbol.csv"
 --http://www.sgx.com/wps/portal/sgxweb/home/company_disclosure/isin_code_download
 url = "http://infopub.sgx.com/FileOpen/.ashx?App=ISINCode&FileID=1"
 
