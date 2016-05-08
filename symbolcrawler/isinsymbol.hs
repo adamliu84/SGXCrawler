@@ -5,6 +5,7 @@ import Data.Char (chr)
 import Data.String.Utils (replace)
 import Data.List
 import qualified Data.Text as T (pack, unpack,strip)
+import qualified Utility (initFile)
 
 csvfilename = "..\\SGXSymbol.csv"
 --http://www.sgx.com/wps/portal/sgxweb/home/company_disclosure/isin_code_download
@@ -50,7 +51,7 @@ main = do
     let lSym = sort $ map toCompany temp
 
     -- Write csv file
-    mapM_ writeCSVData (companyHeaderRow:tail lSym)    
+    Utility.initFile csvfilename >> mapM_ writeCSVData (companyHeaderRow:tail lSym)
 
     print "FIN"
 

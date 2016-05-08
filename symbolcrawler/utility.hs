@@ -1,3 +1,5 @@
-module Utility where
+module Utility (
+initFile
+) where
 
-function1 = "function 1"
+initFile szFilename = writeFile szFilename ""
