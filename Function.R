@@ -88,11 +88,12 @@ generateTagRow <- function(){
   return (dfTag)
 }
 
-
 listSymbols <- function(){
   vCompany <- vector()
-  dfCompany <- read.csv("Symbols.txt")
-  vCompany <- as.character(dfCompany[, 1])
+  #dfCompany <- read.csv("Symbols.txt", sep=";")
+  #vCompany <- as.character(dfCompany[, 1])
+  dfCompany <- read.csv("SGXSymbol.csv", sep=";")
+  vCompany <- unlist(Map(function(x){paste(x,".SI",sep="")},  as.character(dfCompany[, 1])))
   return (vCompany)
 }
 
