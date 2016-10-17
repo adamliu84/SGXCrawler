@@ -7,7 +7,7 @@ import Data.List
 import qualified Data.Text as T (pack, unpack,strip)
 import qualified Utility (initFile)
 
-csvfilename = "..\\SGXSymbol.csv"
+csvfilename = "..//SGXSymbol.csv"
 --http://www.sgx.com/wps/portal/sgxweb/home/company_disclosure/isin_code_download
 url = "http://infopub.sgx.com/FileOpen/.ashx?App=ISINCode&FileID=1"
 
